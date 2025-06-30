@@ -1,0 +1,254 @@
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-top: 6px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.waitlist-form input[type="email"] {
+  padding: 16px 20px;
+  border: 2px solid rgba(161, 0, 255, 0.3);
+  border-radius: 50px;
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(161, 0, 255, 0.1);
+}
+
+.waitlist-form input[type="email"].error {
+  border-color: #EF4444;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+  animation: errorShake 0.5s ease-out;
+}
+
+.waitlist-form input[type="email"]:focus {
+  border-color: #A100FF;
+  box-shadow: 0 8px 32px rgba(161, 0, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.waitlist-form input[type="email"]:focus.error {
+  border-color: #EF4444;
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
+}
+
+.waitlist-form input[type="email"]::placeholder {
+  color: #666;
+  opacity: 0.8;
+}
+
+.waitlist-btn {
+  background: linear-gradient(135deg, #A100FF 0%, #7A02ED 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 24px rgba(161, 0, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.waitlist-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.waitlist-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(161, 0, 255, 0.4);
+}
+
+.waitlist-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.waitlist-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.waitlist-btn.loading {
+  background: linear-gradient(135deg, #7A02ED 0%, #5A02B8 100%);
+  cursor: not-allowed;
+}
+
+.waitlist-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 16px rgba(161, 0, 255, 0.2);
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.waitlist-success {
+  color: #10B981;
+  font-weight: 700;
+  margin-top: 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 24px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 16px;
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  animation: successPulse 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.success-icon {
+  font-size: 2rem;
+  animation: bounce 1s ease-in-out;
+}
+
+.success-content h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #10B981;
+}
+
+.success-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #059669;
+  opacity: 0.9;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.waitlist-error {
+  color: #EF4444;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  text-align: center;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  animation: errorShake 0.5s ease-out;
+  width: 100%;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Responsive para el formulario */
+@media (min-width: 768px) {
+  .waitlist-form {
+    flex-direction: row;
+    gap: 12px;
+    max-width: 500px;
+  }
+  
+  .waitlist-form input[type="email"] {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .waitlist-btn {
+    width: auto;
+    white-space: nowrap;
+  }
+  
+  .waitlist-success {
+    flex-direction: row;
+    text-align: left;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .waitlist-form {
+    gap: 10px;
+  }
+  
+  .waitlist-form input[type="email"] {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+  
+  .waitlist-btn {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+  
+  .waitlist-success {
+    font-size: 1rem;
+    padding: 20px;
+  }
+  
+  .success-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .success-content p {
+    font-size: 0.9rem;
+  }
+}

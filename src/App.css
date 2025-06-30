@@ -1,0 +1,128 @@
+body, html {
+  background: #fff;
+  margin: 0;
+  font-family: 'Inter', 'Arial', sans-serif;
+  color: #1a1a1a;
+}
+.landing-root {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+}
+.landing-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+}
+.landing-logo {
+  width: 68px;
+  margin-bottom: 6px;
+}
+.juntify-gradient {
+  background: linear-gradient(90deg, #A100FF 45%, #7A02ED 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  font-size: 2.6em;
+  letter-spacing: -2px;
+}
+.subtitle {
+  color: #A100FF;
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  margin-top: 2px;
+}
+.about-section {
+  background: #E8D9F6;
+  border-radius: 18px;
+  padding: 18px 18px 12px 18px;
+  margin: 26px 0 16px 0;
+  box-shadow: 0 2px 10px #f1e4fa55;
+}
+.about-section h2 {
+  margin-top: 0;
+  color: #A100FF;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+.about-section ul {
+  margin-top: 10px;
+}
+.coming-soon-section {
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 2px 10px #E8D9F6;
+  padding: 18px 12px 8px 12px;
+  margin-bottom: 20px;
+}
+.soon-title {
+  color: #A100FF;
+  font-size: 1.4em;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.soon-desc {
+  font-size: 1.05em;
+  color: #5d4587;
+  margin-bottom: 16px;
+}
+.waitlist-form {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-top: 6px;
+}
+.waitlist-form input[type="email"] {
+  padding: 10px 12px;
+  border: 2px solid #A100FF;
+  border-radius: 18px;
+  font-size: 1em;
+  outline: none;
+  width: 64%;
+  max-width: 220px;
+  transition: border 0.2s;
+}
+.waitlist-form input[type="email"]:focus {
+  border-color: #7A02ED;
+}
+.waitlist-btn {
+  background: linear-gradient(90deg, #A100FF 60%, #7A02ED 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.waitlist-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.waitlist-success {
+  color: #5CD06E;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 1em;
+}
+.waitlist-error {
+  color: #e74c3c;
+  font-size: 0.95em;
+  margin-top: 6px;
+}
+.footer {
+  text-align: center;
+  color: #a7a7a7;
+  font-size: 0.95em;
+  margin-top: auto;
+  margin-bottom: 18px;
+}
