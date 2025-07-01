@@ -744,3 +744,82 @@
     transform: translateY(0);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #4f8cff;
+    --violet: #b388ff;
+    --pink: #ff7edb;
+    --accent: #b388ff;
+    --light-bg: #18192a;
+    --dark-text: #f7f8fa;
+    --shadow: 0 4px 32px 0 rgba(161,0,255,0.18);
+    --gradient-primary: linear-gradient(135deg, #4f8cff 0%, #b388ff 50%, #ff7edb 100%);
+    --gradient-secondary: linear-gradient(135deg, #b388ff 0%, #ff7edb 100%);
+  }
+  body, .landing-root {
+    background: linear-gradient(135deg, #18192a 0%, #23243a 100%) !important;
+    color: var(--dark-text) !important;
+  }
+  .decorative-bg::before {
+    background: linear-gradient(120deg, var(--blue) 10%, var(--violet) 80%);
+    opacity: 0.18;
+  }
+  .decorative-bg::after {
+    background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
+    opacity: 0.13;
+  }
+  .section, .features, .about-section, .why-section, .final-cta {
+    background: none !important;
+    color: var(--dark-text) !important;
+  }
+  .feature-card, .stat-card, .benefit-item, .about-feature, .waitlist-form input[type="email"], .waitlist-success, .waitlist-error {
+    background: rgba(30, 32, 48, 0.92) !important;
+    color: var(--dark-text) !important;
+    border-color: #2d2e4a !important;
+  }
+  .feature-card h3, .stat-number, .about-title, .color-accent, .cta-content h2 {
+    color: var(--dark-text) !important;
+    background: var(--gradient-primary) !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .footer {
+    background: linear-gradient(135deg, #18192a 0%, #23243a 100%) !important;
+    color: #e0e0e0 !important;
+  }
+  .footer-brand, .footer-logo {
+    filter: brightness(1.2) !important;
+  }
+  .footer-contact a, .footer-social a {
+    color: #b388ff !important;
+  }
+  .social-icons a {
+    color: #b388ff !important;
+  }
+  .social-icons a:hover {
+    color: #ff7edb !important;
+  }
+  .waitlist-btn {
+    background: linear-gradient(135deg, #b388ff 0%, #ff7edb 100%) !important;
+    color: #23243a !important;
+  }
+  .waitlist-btn:disabled {
+    color: #aaa !important;
+  }
+  .waitlist-form input[type="email"]::placeholder {
+    color: #aaa !important;
+    opacity: 0.8;
+  }
+  .waitlist-error {
+    color: #ff7edb !important;
+    border-color: #ff7edb !important;
+    background: rgba(255, 126, 219, 0.08) !important;
+  }
+  .waitlist-success {
+    color: #4fefb8 !important;
+    border-color: #4fefb8 !important;
+    background: rgba(79, 239, 184, 0.08) !important;
+  }
+}

@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = "https://ohkrsgrgcsvimtupgech.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oa3JzZ3JnY3N2aW10dXBnZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMjQ1MjYsImV4cCI6MjA2NjkwMDUyNn0.1wgD3b2oEEw3Vl5iHUKfVtbAKYFEDg7xo9Rqk-H8Bi8";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function WaitlistForm({ buttonLabel = "Unirme" }) {
   const [email, setEmail] = useState("");
@@ -32,31 +37,35 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
     }
 
     try {
-      // Obtener lista existente del localStorage
-      let list = JSON.parse(localStorage.getItem("waitlist") || "[]");
-      
-      // Verificar si el email ya existe
-      if (list.includes(email.toLowerCase().trim())) {
+      // Verificar si ya existe
+      const { data: existing, error: selectError } = await supabase
+        .from('mails')
+        .select('id')
+        .eq('mail', email.toLowerCase().trim())
+        .maybeSingle();
+      if (existing) {
         setError("¡Este correo ya está en la lista de espera!");
         setIsLoading(false);
         return;
       }
-
-      // Agregar email a la lista
-      list.push(email.toLowerCase().trim());
-      localStorage.setItem("waitlist", JSON.stringify(list));
-      
-      // Éxito
+      // Insertar con fecha actual
+      const now = new Date().toISOString();
+      const { data, error: supaError } = await supabase
+        .from('mails')
+        .insert([{ mail: email.toLowerCase().trim(), fechaAnotado: now }]);
+      if (supaError) {
+        setError("Error al guardar en la base de datos. Intenta nuevamente.");
+        setIsLoading(false);
+        return;
+      }
+      // Guardar en localStorage como backup
+      let list = JSON.parse(localStorage.getItem("waitlist") || "[]");
+      if (!list.includes(email.toLowerCase().trim())) {
+        list.push(email.toLowerCase().trim());
+        localStorage.setItem("waitlist", JSON.stringify(list));
+      }
       setSubmitted(true);
       setEmail("");
-      
-      // Opcional: Enviar a analytics o backend
-      // await fetch('/api/waitlist', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email: email.toLowerCase().trim() })
-      // });
-      
     } catch (error) {
       setError("Hubo un error. Por favor, intenta nuevamente.");
     } finally {
@@ -69,7 +78,7 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
     if (error) setError(""); // Limpiar error cuando el usuario empiece a escribir
   };
 
-  if (submitted) {
+  if (submitted && !error) {
     return (
       <div className="waitlist-success">
         <div className="success-icon">🎉</div>
@@ -83,29 +92,32 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
 
   return (
     <form className="waitlist-form" onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Tu correo electrónico"
-        value={email}
-        onChange={handleEmailChange}
-        disabled={isLoading}
-        required
-        className={error ? "error" : ""}
-      />
-      <button 
-        type="submit" 
-        className={`waitlist-btn ${isLoading ? "loading" : ""}`} 
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <>
-            <span className="loading-spinner"></span>
-            Uniéndome...
-          </>
-        ) : (
-          buttonLabel
-        )}
-      </button>
+      <div className="waitlist-form-row">
+        <input
+          type="email"
+          placeholder="Tu correo electrónico"
+          value={email}
+          onChange={handleEmailChange}
+          disabled={isLoading}
+          required
+          className={error ? "error" : ""}
+          autoFocus
+        />
+        <button 
+          type="submit" 
+          className={`waitlist-btn ${isLoading ? "loading" : ""}`} 
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <span className="loading-spinner"></span>
+              Uniéndome...
+            </>
+          ) : (
+            buttonLabel
+          )}
+        </button>
+      </div>
       {error && <div className="waitlist-error">{error}</div>}
     </form>
   );

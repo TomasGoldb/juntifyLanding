@@ -1,6 +1,7 @@
 import React from "react";
 import WaitlistForm from "./WaitlistForm";
 import "./Landing.css";
+import { FaInstagram, FaLinkedin } from "react-icons/fa";
 
 function GradientText({ children }) {
   return <span className="gradient-text">{children}</span>;
@@ -194,15 +195,12 @@ export default function Landing() {
           <div className="footer-contact">
             <h4>Contactanos</h4>
             <a href="mailto:juntifyapp@gmail.com">juntifyapp@gmail.com</a>
-            <span>Tel: +54 9 11 1234 5678</span>
-            <span>Dirección: Very Web, Almagro, CABA</span>
           </div>
           <div className="footer-social">
             <h4>Seguinos</h4>
             <div className="social-icons">
-              <a href="#" aria-label="Instagram">📱</a>
-              <a href="#" aria-label="YouTube">📺</a>
-              <a href="#" aria-label="Twitter">🐦</a>
+              <a href="https://www.instagram.com/juntifyapp/" aria-label="Instagram"><FaInstagram size={24} /></a>
+              <a href="https://www.linkedin.com/company/juntify" aria-label="Linkedin"><FaLinkedin size={24} /></a>
             </div>
           </div>
         </div>
