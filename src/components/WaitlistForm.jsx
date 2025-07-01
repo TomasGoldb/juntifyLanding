@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { createClient } from '@supabase/supabase-js';
+import emailjs from '@emailjs/browser';
 
 const SUPABASE_URL = "https://ohkrsgrgcsvimtupgech.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oa3JzZ3JnY3N2aW10dXBnZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMjQ1MjYsImV4cCI6MjA2NjkwMDUyNn0.1wgD3b2oEEw3Vl5iHUKfVtbAKYFEDg7xo9Rqk-H8Bi8";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const EMAILJS_SERVICE_ID = "service_s6aakua";
+const EMAILJS_TEMPLATE_ID = "template_1g2pb8m";
+const EMAILJS_PUBLIC_KEY = "3pZClmXq5kpLrVeyS"; // Debes poner tu public key de EmailJS
 
 export default function WaitlistForm({ buttonLabel = "Unirme" }) {
   const [email, setEmail] = useState("");
@@ -14,6 +19,28 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const sendConfirmationEmail = async (toEmail) => {
+    const templateParams = {
+      to_email: toEmail,
+      instagram_url: "https://www.instagram.com/juntifyapp/",
+      mensaje_bonito: "¡Gracias por sumarte a la waitlist de Juntify! Pronto vas a recibir novedades exclusivas. Mientras tanto, seguinos en Instagram para no perderte nada:",
+      firma: "El equipo de Juntify"
+    };
+    try {
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+      console.log("EmailJS result:", result);
+      alert("¡Email de confirmación enviado!");
+    } catch (e) {
+      console.error("Error enviando email de confirmación:", e);
+      alert("Error enviando email: " + (e.text || e.message || e));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -58,6 +85,8 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
         setIsLoading(false);
         return;
       }
+      // Enviar email de confirmación
+      await sendConfirmationEmail(email.toLowerCase().trim());
       // Guardar en localStorage como backup
       let list = JSON.parse(localStorage.getItem("waitlist") || "[]");
       if (!list.includes(email.toLowerCase().trim())) {
