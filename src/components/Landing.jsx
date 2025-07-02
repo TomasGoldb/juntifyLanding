@@ -109,12 +109,13 @@ export default function Landing() {
         </div>
         <div className="features-grid">
           <FeatureCard img="/img/imghome4.png" alt="Seguridad" title="Seguridad Garantizada">
-Garantizamos una experiencia segura desde la planificación hasta el encuentro. Ubicación en tiempo real, batería visible y espacios verificados para disfrutar cada juntada sin preocupaciones ni sobresaltos.
-            <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
-Planificá sin caos ni confusión. Con Juntify centralizás todo: ideas, votaciones, reservas, horarios y presupuestos, para que organizar una juntada sea ágil, clara y sin frustraciones innecesarias.
-            </FeatureCard>
+            Garantizamos una experiencia segura desde la planificación hasta el encuentro. Ubicación en tiempo real, batería visible y espacios verificados para disfrutar cada juntada sin preocupaciones ni sobresaltos.
+          </FeatureCard>
+          <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
+            Planificá sin caos ni confusión. Con Juntify centralizás todo: ideas, votaciones, reservas, horarios y presupuestos, para que organizar una juntada sea ágil, clara y sin frustraciones innecesarias.
+          </FeatureCard>
           <FeatureCard img="/img/imghome3.png" alt="Confianza" title="Colaboración Efectiva">
-Involucrá a todos en el proceso. Cada participante propone ideas, vota, ajusta detalles y ayuda a que el plan refleje intereses reales, fomentando encuentros más democráticos y entretenidos para todos.
+            Involucrá a todos en el proceso. Cada participante propone ideas, vota, ajusta detalles y ayuda a que el plan refleje intereses reales, fomentando encuentros más democráticos y entretenidos para todos.
           </FeatureCard>
         </div>
       </Section>

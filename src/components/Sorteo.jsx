@@ -14,6 +14,13 @@ const BLOQUES = [
   { id: 4, nombre: "Bloque 4", hora: "14:30 - 16:00", color: "#3A0280" }
 ];
 
+// Helper para obtener fecha YYYY-MM-DD en zona de Montevideo
+function getMontevideoDate(date) {
+  return new Date(
+    date.toLocaleString("en-US", { timeZone: "America/Montevideo" })
+  );
+}
+
 export default function Sorteo() {
   const [emails, setEmails] = useState([]);
   const [ganador, setGanador] = useState(null);
@@ -25,6 +32,9 @@ export default function Sorteo() {
 
   useEffect(() => {
     cargarEmails();
+    setGanador(null);
+    setSorteosRealizados([]);
+    // eslint-disable-next-line
   }, [fechaSeleccionada]);
 
   const cargarEmails = async () => {
@@ -32,12 +42,9 @@ export default function Sorteo() {
       setIsLoading(true);
       setError("");
       
-      // Obtener emails de la fecha seleccionada
-      const fechaInicio = new Date(fechaSeleccionada);
-      fechaInicio.setHours(0, 0, 0, 0);
-      
-      const fechaFin = new Date(fechaSeleccionada);
-      fechaFin.setHours(23, 59, 59, 999);
+      // Fechas en UTC para el rango del día seleccionado
+      const fechaInicio = new Date(fechaSeleccionada + "T00:00:00.000Z");
+      const fechaFin = new Date(fechaSeleccionada + "T23:59:59.999Z");
 
       const { data, error } = await supabase
         .from('mails')
@@ -58,9 +65,53 @@ export default function Sorteo() {
     }
   };
 
+  // Devuelve minutos desde 00:00 para la hora local de Montevideo
+  function getMinutosMontevideo(fechaISO) {
+    const fechaLocal = new Date(
+      new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
+    );
+    const horas = fechaLocal.getHours();
+    const minutos = fechaLocal.getMinutes();
+    return horas * 60 + minutos;
+  }
+
+  // Devuelve la fecha local de Montevideo en formato YYYY-MM-DD (para debug)
+  function getFechaLocalMontevideo(fechaISO) {
+    const fechaLocal = new Date(
+      new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
+    );
+    return fechaLocal.toISOString().split("T")[0];
+  }
+
   const sortearPorBloque = async (bloque) => {
     if (emails.length === 0) {
       setError("No hay emails registrados para esta fecha");
+      return;
+    }
+
+    // Filtrar emails por bloque usando hora local de Montevideo
+    const emailsBloque = emails.filter(email => {
+      // Filtro extra: asegurarse que la fecha local también sea la seleccionada
+      const fechaLocalStr = getFechaLocalMontevideo(email.fechaAnotado);
+      if (fechaLocalStr !== fechaSeleccionada) return false;
+
+      const tiempoTotal = getMinutosMontevideo(email.fechaAnotado);
+
+      let perteneceAlBloque = false;
+      switch (bloque.id) {
+        case 1: perteneceAlBloque = tiempoTotal >= 540 && tiempoTotal < 640; break;   // 09:00 - 10:40
+        case 2: perteneceAlBloque = tiempoTotal >= 640 && tiempoTotal < 735; break;   // 10:40 - 12:15
+        case 3: perteneceAlBloque = tiempoTotal >= 770 && tiempoTotal < 870; break;   // 12:50 - 14:30
+        case 4: perteneceAlBloque = tiempoTotal >= 870 && tiempoTotal < 960; break;   // 14:30 - 16:00
+        default: perteneceAlBloque = false;
+      }
+      // Debug (puedes sacar el console luego)
+      //console.log(`Mail: ${email.mail} | fechaAnotado: ${email.fechaAnotado} | LocalDate: ${fechaLocalStr} | Minutos: ${tiempoTotal} | Bloque ${bloque.id}: ${perteneceAlBloque}`);
+      return perteneceAlBloque;
+    });
+
+    if (emailsBloque.length === 0) {
+      setError(`No hay emails registrados en el ${bloque.nombre} para esta fecha`);
       return;
     }
 
@@ -68,37 +119,9 @@ export default function Sorteo() {
     setError("");
     setGanador(null);
 
-    // Simular delay para mejor UX
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     try {
-      // Filtrar emails por bloque horario
-      const emailsBloque = emails.filter(email => {
-        const fechaEmail = new Date(email.fechaAnotado);
-        const hora = fechaEmail.getHours();
-        const minutos = fechaEmail.getMinutes();
-        const tiempoTotal = hora * 60 + minutos; // Convertir a minutos para comparación precisa
-        
-        switch (bloque.id) {
-          case 1: // 09:00 - 10:40 (540 - 640 minutos)
-            return tiempoTotal >= 540 && tiempoTotal < 640;
-          case 2: // 10:40 - 12:15 (640 - 735 minutos)
-            return tiempoTotal >= 640 && tiempoTotal < 735;
-          case 3: // 12:50 - 14:30 (770 - 870 minutos)
-            return tiempoTotal >= 770 && tiempoTotal < 870;
-          case 4: // 14:30 - 16:00 (870 - 960 minutos)
-            return tiempoTotal >= 870 && tiempoTotal < 960;
-          default: return false;
-        }
-      });
-
-      if (emailsBloque.length === 0) {
-        setError(`No hay emails registrados en el ${bloque.nombre}`);
-        setIsLoading(false);
-        return;
-      }
-
-      // Seleccionar ganador aleatorio
       const ganadorAleatorio = emailsBloque[Math.floor(Math.random() * emailsBloque.length)];
       setGanador({
         email: ganadorAleatorio.mail,
@@ -106,7 +129,6 @@ export default function Sorteo() {
         tipo: "bloque"
       });
 
-      // Guardar en historial
       const nuevoSorteo = {
         id: Date.now(),
         email: ganadorAleatorio.mail,
@@ -115,7 +137,6 @@ export default function Sorteo() {
         tipo: "bloque"
       };
       setSorteosRealizados(prev => [nuevoSorteo, ...prev]);
-
     } catch (err) {
       setError("Error al realizar el sorteo: " + err.message);
     } finally {
@@ -129,23 +150,31 @@ export default function Sorteo() {
       return;
     }
 
+    // Filtro extra: emails que en Montevideo correspondan a la fecha seleccionada
+    const emailsDelDia = emails.filter(email => {
+      const fechaLocalStr = getFechaLocalMontevideo(email.fechaAnotado);
+      return fechaLocalStr === fechaSeleccionada;
+    });
+
+    if (emailsDelDia.length === 0) {
+      setError("No hay emails registrados para esta fecha (en horario local)");
+      return;
+    }
+
     setIsLoading(true);
     setError("");
     setGanador(null);
 
-    // Simular delay para mejor UX
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     try {
-      // Seleccionar ganador aleatorio de todos los emails del día
-      const ganadorAleatorio = emails[Math.floor(Math.random() * emails.length)];
+      const ganadorAleatorio = emailsDelDia[Math.floor(Math.random() * emailsDelDia.length)];
       setGanador({
         email: ganadorAleatorio.mail,
         bloque: null,
         tipo: "total"
       });
 
-      // Guardar en historial
       const nuevoSorteo = {
         id: Date.now(),
         email: ganadorAleatorio.mail,
@@ -154,7 +183,6 @@ export default function Sorteo() {
         tipo: "total"
       };
       setSorteosRealizados(prev => [nuevoSorteo, ...prev]);
-
     } catch (err) {
       setError("Error al realizar el sorteo: " + err.message);
     } finally {
@@ -174,18 +202,18 @@ export default function Sorteo() {
   return (
     <div className="sorteo-container">
       <div className="sorteo-header">
-                  <div className="sorteo-header-content">
-            <div className="sorteo-header-left">
-              <h1>🎉 Sorteo Juntify</h1>
-              <p>Selecciona una fecha y realiza el sorteo</p>
-            </div>
-            <button 
-              className="volver-btn"
-              onClick={handleLogout}
-            >
-              ← Volver
-            </button>
+        <div className="sorteo-header-content">
+          <div className="sorteo-header-left">
+            <h1>🎉 Sorteo Juntify</h1>
+            <p>Selecciona una fecha y realiza el sorteo</p>
           </div>
+          <button 
+            className="volver-btn"
+            onClick={handleLogout}
+          >
+            ← Volver
+          </button>
+        </div>
       </div>
 
       <div className="sorteo-controls">
@@ -202,7 +230,7 @@ export default function Sorteo() {
 
         <div className="stats">
           <div className="stat-item">
-            <span className="stat-number">{emails.length}</span>
+            <span className="stat-number">{emails.filter(email => getFechaLocalMontevideo(email.fechaAnotado) === fechaSeleccionada).length}</span>
             <span className="stat-label">Emails registrados</span>
           </div>
         </div>
@@ -302,4 +330,4 @@ export default function Sorteo() {
       )}
     </div>
   );
-} 
+}

@@ -899,10 +899,18 @@ body {
   
   .feature-card h3, .stat-number, .about-title, .color-accent, .cta-content h2 {
     color: #1d133e !important;
+    background: none !important;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+  }
+  
+  /* Mantener el gradiente solo en el título principal del hero */
+  .gradient-text {
     background: var(--gradient-primary) !important;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
   }
   
   .footer {
