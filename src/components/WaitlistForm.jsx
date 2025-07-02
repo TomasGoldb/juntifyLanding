@@ -36,10 +36,8 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
         EMAILJS_PUBLIC_KEY
       );
       console.log("EmailJS result:", result);
-      alert("¡Email de confirmación enviado!");
     } catch (e) {
       console.error("Error enviando email de confirmación:", e);
-      alert("Error enviando email: " + (e.text || e.message || e));
     }
   };
 
