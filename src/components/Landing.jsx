@@ -188,8 +188,8 @@ Juntify convierte tus ganas de juntarte en encuentros reales. Disfrutá de una e
       {/* CTA FINAL */}
       <Section className="final-cta">
         <div className="cta-content">
-          <h2>¿Listo para transformar tu productividad?</h2>
-          <p>Únete a la waitlist y sé notificado cuando Juntify esté disponible</p>
+          <h2>¿Listo para que tus juntadas sí sucedan?</h2>
+          <p>Sumate a la waitlist y enterate antes que nadie del lanzamiento de Juntify</p>
           <WaitlistForm buttonLabel="Unirme Ahora" />
         </div>
       </Section>
