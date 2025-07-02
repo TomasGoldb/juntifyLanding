@@ -64,8 +64,8 @@ export default function Landing() {
             </GradientText>
           </h1>
           <p className="hero-desc">
-            Organiza tus actividades de manera sencilla y efectiva. Con nuestra app, podés crear, gestionar y compartir planes de forma rápida y colaborativa.{" "}
-            <strong>¡Sumate hoy y llevá tu planificación al siguiente nivel!</strong>
+            Coordiná juntadas de forma simple, rápida y sin estrés. Juntify unifica todo lo que necesitás para organizar planes en grupo: ideas, votaciones, accesibilidad, seguridad y más, en un solo lugar.
+<strong>¡Sumate y hacé que cada encuentro sea posible!</strong>
           </p>
           
           <div className="hero-cta">
@@ -109,13 +109,12 @@ export default function Landing() {
         </div>
         <div className="features-grid">
           <FeatureCard img="/img/imghome4.png" alt="Seguridad" title="Seguridad Garantizada">
-            Tus datos y actividades están siempre protegidos. Estamos comprometidos con ofrecerte un entorno confiable y seguro para todas tus actividades.
-          </FeatureCard>
-          <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
-            Lleva el control total de tus compromisos y actividades. Accede a tus eventos y tareas de manera sencilla, manteniendo todo en orden y al alcance.
-          </FeatureCard>
+Garantizamos una experiencia segura desde la planificación hasta el encuentro. Ubicación en tiempo real, batería visible y espacios verificados para disfrutar cada juntada sin preocupaciones ni sobresaltos.
+            <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
+Planificá sin caos ni confusión. Con Juntify centralizás todo: ideas, votaciones, reservas, horarios y presupuestos, para que organizar una juntada sea ágil, clara y sin frustraciones innecesarias.
+            </FeatureCard>
           <FeatureCard img="/img/imghome3.png" alt="Confianza" title="Colaboración Efectiva">
-            Fomentamos relaciones auténticas. Comparte y coordina actividades con tus amigos y grupos sin complicaciones, todo en un solo lugar.
+Involucrá a todos en el proceso. Cada participante propone ideas, vota, ajusta detalles y ayuda a que el plan refleje intereses reales, fomentando encuentros más democráticos y entretenidos para todos.
           </FeatureCard>
         </div>
       </Section>
@@ -136,12 +135,11 @@ export default function Landing() {
         <div className="about-text">
           <h2 className="about-title">¿Qué es Juntify?</h2>
           <p>
-            ¡Es tu compañero perfecto para una planificación sin estrés! Con Juntify, transformar tus ideas en planes concretos nunca fue tan fácil. Ordená tu agenda, organiza eventos y coordina proyectos de manera intuitiva y colaborativa.
-          </p>
+Juntify es tu aliada para transformar ideas en juntadas reales. Ya no necesitás 5 apps para coordinar: con Juntify podés encontrar lugares accesibles, votar planes, compartir mapas y mantener todo claro para cada participante.          </p>
           <div className="about-features">
             <div className="about-feature">
               <span className="feature-icon">🎯</span>
-              <span>Planificación inteligente</span>
+              <span>Planificación personalizada</span>
             </div>
             <div className="about-feature">
               <span className="feature-icon">🤝</span>
@@ -149,7 +147,7 @@ export default function Landing() {
             </div>
             <div className="about-feature">
               <span className="feature-icon">⚡</span>
-              <span>Interfaz súper rápida</span>
+              <span>Todo en un solo lugar</span>
             </div>
           </div>
         </div>
@@ -166,21 +164,21 @@ export default function Landing() {
         <div className="why-text">
           <h2 className="about-title color-accent">¿Por qué usarlo?</h2>
           <p>
-            La forma más sencilla de convertir tus ideas en acción. Con Juntify, planificar nunca fue tan eficiente y agradable. Nuestra app te permite organizar tus tareas, coordinar eventos y gestionar proyectos con facilidad.
+Juntify convierte tus ganas de juntarte en encuentros reales. Disfrutá de una experiencia completa: desde proponer ideas hasta confirmar asistencia, con total claridad y sin estrés organizativo.
           </p>
           <div className="why-benefits">
             <div className="benefit-item">
               <div className="benefit-icon">🚀</div>
               <div>
                 <h4>Lanzamiento Próximo</h4>
-                <p>Sé de los primeros en probar Juntify</p>
+                <p>Formá parte de la primera comunidad en revolucionar la forma de organizar planes.</p>
               </div>
             </div>
             <div className="benefit-item">
               <div className="benefit-icon">🎁</div>
               <div>
                 <h4>Acceso Anticipado</h4>
-                <p>Beneficios exclusivos para early adopters</p>
+                <p>Descuentos, funciones premium, acceso a alianzas con apps de transporte y gastronomía ¡y muchos beneficios más!</p>
               </div>
             </div>
           </div>
