@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import WaitlistForm from "./WaitlistForm";
 import "./Landing.css";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
@@ -33,10 +34,18 @@ function StatCard({ number, label }) {
 }
 
 export default function Landing() {
+  const navigate = useNavigate();
+
+  const handleGoToSorteo = () => {
+    navigate("/sorteo");
+  };
+
   return (
     <div className="landing-root">
       {/* Fondo decorativo */}
       <div className="decorative-bg" aria-hidden />
+
+
 
       {/* HERO */}
       <Section className="hero">
@@ -202,6 +211,8 @@ export default function Landing() {
               <a href="https://www.instagram.com/juntifyapp/" aria-label="Instagram"><FaInstagram size={24} /></a>
               <a href="https://www.linkedin.com/company/juntify" aria-label="Linkedin"><FaLinkedin size={24} /></a>
             </div>
+
+
           </div>
         </div>
         <div className="footer-copy">
