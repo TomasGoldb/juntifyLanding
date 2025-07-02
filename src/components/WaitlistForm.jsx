@@ -84,7 +84,7 @@ export default function WaitlistForm({ buttonLabel = "Unirme" }) {
         return;
       }
       // Enviar email de confirmación
-      // -------------------- await sendConfirmationEmail(email.toLowerCase().trim());
+     await sendConfirmationEmail(email.toLowerCase().trim());
       // Guardar en localStorage como backup
       let list = JSON.parse(localStorage.getItem("waitlist") || "[]");
       if (!list.includes(email.toLowerCase().trim())) {
