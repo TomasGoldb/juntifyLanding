@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import WaitlistForm from "./WaitlistForm";
 import "./Landing.css";
@@ -35,6 +35,11 @@ function StatCard({ number, label }) {
 
 export default function Landing() {
   const navigate = useNavigate();
+
+  // Scroll al inicio cuando se carga la página
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleGoToSorteo = () => {
     navigate("/sorteo");

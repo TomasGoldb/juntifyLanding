@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Landing from "./components/Landing";
 import Sorteo from "./components/Sorteo";
 import LoginPage from "./components/LoginPage";
@@ -10,10 +10,22 @@ import "./components/WaitlistForm.css";
 import "./components/Sorteo.css";
 import "./components/LoginPage.css";
 
+// Componente para manejar scroll automático
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Routes>
           {/* Ruta principal - Landing page */}
           <Route path="/" element={<Landing />} />

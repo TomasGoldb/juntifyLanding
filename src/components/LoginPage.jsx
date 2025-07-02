@@ -52,7 +52,6 @@ export default function LoginPage() {
         <div className="login-header">
           <h1>🔐 Acceso al Sorteo</h1>
           <p>Ingresa la contraseña para acceder al panel de sorteo de Juntify</p>
-          <p style={{fontSize: '0.8rem', color: '#999'}}>Debug: Contraseña = {ADMIN_PASSWORD}</p>
         </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
@@ -102,9 +101,7 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <div className="login-footer">
-          <p>💡 Pista: La contraseña está relacionada con el año de lanzamiento</p>
-        </div>
+
       </div>
     </div>
   );
