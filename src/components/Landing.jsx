@@ -76,7 +76,7 @@ export default function Landing() {
           </div>
         </div>
         <div className="hero-img">
-          <img src="/img/imghome3.png" alt="Personas conectando" />
+          <img src="./vite.png" alt="Personas conectando" />
         </div>
       </Section>
 
@@ -108,13 +108,13 @@ export default function Landing() {
           <p>Descubre las características que hacen de Juntify tu compañero perfecto</p>
         </div>
         <div className="features-grid">
-          <FeatureCard img="/img/imghome4.png" alt="Seguridad" title="Seguridad Garantizada">
+          <FeatureCard img="/img/Cybersecurity.svg" alt="Seguridad" title="Seguridad Garantizada">
             Garantizamos una experiencia segura desde la planificación hasta el encuentro. Ubicación en tiempo real, batería visible y espacios verificados para disfrutar cada juntada sin preocupaciones ni sobresaltos.
           </FeatureCard>
           <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
             Planificá sin caos ni confusión. Con Juntify centralizás todo: ideas, votaciones, reservas, horarios y presupuestos, para que organizar una juntada sea ágil, clara y sin frustraciones innecesarias.
           </FeatureCard>
-          <FeatureCard img="/img/imghome3.png" alt="Confianza" title="Colaboración Efectiva">
+          <FeatureCard img="/img/Collaboration.svg" alt="Confianza" title="Colaboración Efectiva">
             Involucrá a todos en el proceso. Cada participante propone ideas, vota, ajusta detalles y ayuda a que el plan refleje intereses reales, fomentando encuentros más democráticos y entretenidos para todos.
           </FeatureCard>
         </div>
@@ -153,14 +153,14 @@ Juntify es tu aliada para transformar ideas en juntadas reales. Ya no necesitás
           </div>
         </div>
         <div className="about-img">
-          <img src="/img/Facetime.svg" alt="Teléfono enviando mensaje" />
+          <img src="/img/World Connection 1.svg" alt="Teléfono enviando mensaje" />
         </div>
       </Section>
 
       {/* POR QUÉ USARLO */}
       <Section className="why-section">
         <div className="why-img">
-          <img src="/img/imghome2.png" alt="Red social y mail" />
+          <img src="/img/Leadership.svg" alt="Red social y mail" />
         </div>
         <div className="why-text">
           <h2 className="about-title color-accent">¿Por qué usarlo?</h2>
