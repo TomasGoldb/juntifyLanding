@@ -21,6 +21,24 @@ function getMontevideoDate(date) {
   );
 }
 
+// Devuelve minutos desde 00:00 para la hora local de Montevideo
+function getMinutosMontevideo(fechaISO) {
+  const fechaLocal = new Date(
+    new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
+  );
+  const horas = fechaLocal.getHours();
+  const minutos = fechaLocal.getMinutes();
+  return horas * 60 + minutos;
+}
+
+// Devuelve la fecha local de Montevideo en formato YYYY-MM-DD (para debug y filtro real)
+function getFechaLocalMontevideo(fechaISO) {
+  const fechaLocal = new Date(
+    new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
+  );
+  return fechaLocal.toISOString().split("T")[0];
+}
+
 export default function Sorteo() {
   const [emails, setEmails] = useState([]);
   const [ganador, setGanador] = useState(null);
@@ -65,31 +83,13 @@ export default function Sorteo() {
     }
   };
 
-  // Devuelve minutos desde 00:00 para la hora local de Montevideo
-  function getMinutosMontevideo(fechaISO) {
-    const fechaLocal = new Date(
-      new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
-    );
-    const horas = fechaLocal.getHours();
-    const minutos = fechaLocal.getMinutes();
-    return horas * 60 + minutos;
-  }
-
-  // Devuelve la fecha local de Montevideo en formato YYYY-MM-DD (para debug)
-  function getFechaLocalMontevideo(fechaISO) {
-    const fechaLocal = new Date(
-      new Date(fechaISO).toLocaleString("en-US", { timeZone: "America/Montevideo" })
-    );
-    return fechaLocal.toISOString().split("T")[0];
-  }
-
   const sortearPorBloque = async (bloque) => {
     if (emails.length === 0) {
       setError("No hay emails registrados para esta fecha");
       return;
     }
 
-    // Filtrar emails por bloque usando hora local de Montevideo
+    // Filtrar emails por bloque usando hora local de Montevideo y fecha seleccionada
     const emailsBloque = emails.filter(email => {
       // Filtro extra: asegurarse que la fecha local también sea la seleccionada
       const fechaLocalStr = getFechaLocalMontevideo(email.fechaAnotado);
@@ -105,8 +105,6 @@ export default function Sorteo() {
         case 4: perteneceAlBloque = tiempoTotal >= 870 && tiempoTotal < 960; break;   // 14:30 - 16:00
         default: perteneceAlBloque = false;
       }
-      // Debug (puedes sacar el console luego)
-      //console.log(`Mail: ${email.mail} | fechaAnotado: ${email.fechaAnotado} | LocalDate: ${fechaLocalStr} | Minutos: ${tiempoTotal} | Bloque ${bloque.id}: ${perteneceAlBloque}`);
       return perteneceAlBloque;
     });
 
@@ -150,7 +148,7 @@ export default function Sorteo() {
       return;
     }
 
-    // Filtro extra: emails que en Montevideo correspondan a la fecha seleccionada
+    // Filtrar emails que en Montevideo correspondan a la fecha seleccionada
     const emailsDelDia = emails.filter(email => {
       const fechaLocalStr = getFechaLocalMontevideo(email.fechaAnotado);
       return fechaLocalStr === fechaSeleccionada;
@@ -275,7 +273,7 @@ export default function Sorteo() {
         </div>
 
         <div className="sorteo-total">
-          <h2>Sorteo Total del Día</h2>
+          <h2 style={{color:'#A100FF'}}>Sorteo Total del Día</h2>
           <button
             className="sortear-total-btn"
             onClick={sorteoTotal}

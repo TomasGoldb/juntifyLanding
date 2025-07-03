@@ -1,3 +1,7 @@
+#root{
+  width: 100%;
+}
+
 .sorteo-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -142,7 +146,9 @@
 
 .sorteo-content {
   display: grid;
+  grid-template-columns: 2fr 1fr;
   gap: 3rem;
+  align-items: center;
 }
 
 .bloques-container h2,
@@ -157,7 +163,7 @@
 
 .bloques-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -236,6 +242,8 @@
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  position: sticky;
+  top: 2rem;
 }
 
 .sortear-total-btn {
@@ -437,10 +445,50 @@
   font-weight: 500;
 }
 
-/* Responsive */
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .sorteo-content {
+    grid-template-columns: 3fr 1fr;
+    gap: 4rem;
+  }
+  
+  .bloques-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .sorteo-total {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sorteo-container {
+    padding: 1.5rem;
+  }
+  
+  .sorteo-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .sorteo-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .bloques-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .sorteo-container {
     padding: 1rem;
+  }
+
+  .sorteo-header {
+    margin-bottom: 2rem;
   }
 
   .sorteo-header-content {
@@ -456,62 +504,302 @@
   .volver-btn {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
+    align-self: center;
   }
 
   .sorteo-header h1 {
     font-size: 2rem;
-  }
-
-  .sorteo-controls {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .stats {
-    justify-content: center;
-  }
-
-  .bloques-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sortear-total-btn {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-  }
-
-  .ganador-card {
-    padding: 2rem;
-  }
-
-  .ganador-email {
-    font-size: 1.2rem;
-  }
-
-  .historial-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .sorteo-header h1 {
-    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .sorteo-header p {
     font-size: 1rem;
   }
 
+  .sorteo-controls {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .fecha-selector {
+    align-items: center;
+  }
+
+  .fecha-selector input {
+    min-width: 200px;
+  }
+
+  .stats {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .bloques-container h2,
+  .sorteo-total h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .bloques-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   .bloque-card {
+    margin: 0;
+  }
+
+  .bloque-header {
+    padding: 1.25rem;
+  }
+
+  .bloque-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .bloque-content {
+    padding: 1.25rem;
+  }
+
+  .sortear-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .sorteo-total {
+    padding: 1.5rem;
+  }
+
+  .sortear-total-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .ganador-container {
+    margin: 2rem 0;
+  }
+
+  .ganador-card {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .ganador-header h3 {
+    font-size: 1.75rem;
+  }
+
+  .ganador-email {
+    font-size: 1.2rem;
+    padding: 0.875rem;
+  }
+
+  .historial-container {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .historial-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .historial-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.875rem;
+  }
+
+  .historial-info {
+    width: 100%;
+  }
+
+  .historial-fecha {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .sorteo-container {
+    padding: 0.75rem;
+  }
+
+  .sorteo-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .sorteo-header p {
+    font-size: 0.95rem;
+  }
+
+  .sorteo-controls {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .fecha-selector input {
+    min-width: 180px;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .stats {
+    gap: 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .bloques-container h2,
+  .sorteo-total h2 {
+    font-size: 1.3rem;
+  }
+
+  .bloque-header {
+    padding: 1rem;
+  }
+
+  .bloque-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .bloque-hora {
+    font-size: 0.8rem;
+  }
+
+  .bloque-content {
+    padding: 1rem;
+  }
+
+  .sortear-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .sorteo-total {
+    padding: 1.25rem;
+  }
+
+  .sortear-total-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .ganador-card {
+    padding: 1.25rem;
     margin: 0 0.5rem;
   }
 
-  .sortear-btn,
-  .sortear-total-btn {
-    padding: 0.75rem 1.5rem;
+  .ganador-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .ganador-email {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+  }
+
+  .limpiar-btn {
+    padding: 0.625rem 1.25rem;
     font-size: 0.9rem;
+  }
+
+  .historial-container {
+    padding: 1.25rem;
+  }
+
+  .historial-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .historial-item {
+    padding: 0.75rem;
+  }
+
+  .historial-email {
+    font-size: 0.9rem;
+  }
+
+  .historial-bloque,
+  .historial-fecha {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .sorteo-container {
+    padding: 0.5rem;
+  }
+
+  .sorteo-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .sorteo-header p {
+    font-size: 0.9rem;
+  }
+
+  .sorteo-controls {
+    padding: 0.875rem;
+  }
+
+  .fecha-selector input {
+    min-width: 160px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  .bloque-header h3 {
+    font-size: 1rem;
+  }
+
+  .bloque-hora {
+    font-size: 0.75rem;
+  }
+
+  .sortear-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .sortear-total-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .ganador-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .ganador-email {
+    font-size: 1rem;
+    padding: 0.625rem;
+  }
+
+  .historial-container {
+    padding: 1rem;
+  }
+
+  .historial-container h2 {
+    font-size: 1.1rem;
   }
 } 
