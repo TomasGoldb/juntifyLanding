@@ -111,7 +111,7 @@ export default function Landing() {
           <FeatureCard img="/img/Cybersecurity.svg" alt="Seguridad" title="Seguridad Garantizada">
             Garantizamos una experiencia segura desde la planificación hasta el encuentro. Ubicación en tiempo real, batería visible y espacios verificados para disfrutar cada juntada sin preocupaciones ni sobresaltos.
           </FeatureCard>
-          <FeatureCard img="/img/imghome2.png" alt="Organización" title="Organización Inteligente">
+          <FeatureCard img="/img/Organizacion.svg" alt="Organización" title="Organización Inteligente">
             Planificá sin caos ni confusión. Con Juntify centralizás todo: ideas, votaciones, reservas, horarios y presupuestos, para que organizar una juntada sea ágil, clara y sin frustraciones innecesarias.
           </FeatureCard>
           <FeatureCard img="/img/Collaboration.svg" alt="Confianza" title="Colaboración Efectiva">
