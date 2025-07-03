@@ -10,7 +10,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const BLOQUES = [
   { id: 1, nombre: "Bloque 1", hora: "09:00 - 10:40", color: "#A100FF" },
   { id: 2, nombre: "Bloque 2", hora: "10:40 - 12:15", color: "#7A02ED" },
-  { id: 3, nombre: "Bloque 3", hora: "12:50 - 14:30", color: "#5A02B8" },
+  { id: 3, nombre: "Bloque 3", hora: "13:10 - 14:30", color: "#5A02B8" },
   { id: 4, nombre: "Bloque 4", hora: "14:30 - 16:00", color: "#3A0280" }
 ];
 

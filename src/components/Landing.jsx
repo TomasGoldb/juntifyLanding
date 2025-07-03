@@ -199,8 +199,7 @@ Juntify convierte tus ganas de juntarte en encuentros reales. Disfrutá de una e
       <footer className="footer">
         <div className="footer-cols">
           <div className="footer-branding">
-            <img src="/img/logo.svg" alt="Logo Juntify" className="footer-logo" />
-            <span className="footer-brand">Juntify</span>
+            <img src="./vite.png" alt="Logo Juntify"  className="footer-logo" />
             <p className="footer-legal">
               La reproducción, utilización o modificación del contenido de este sitio está sujeta a derechos de autor y a las políticas de Juntify.
             </p>
